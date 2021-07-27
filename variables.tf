@@ -1,9 +1,6 @@
-variable "AWS_ACCESS_KEY" {}
-variable "AWS_SECRET_KEY" {}
-
 variable "AWS_KEY_PAIR_NAME" {
   type    = string
-  default = "sgilz-rampup"
+  default = "sgilz-key-pair"
 }
 
 variable "AWS_REGION" {
