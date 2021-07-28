@@ -1,5 +1,5 @@
 module "asg" {
-  name    = "sgilz-api-asg"
+  name    = var.name
   source  = "terraform-aws-modules/autoscaling/aws"
   version = "~> 4.0"
 
@@ -18,17 +18,19 @@ module "asg" {
   max_size                  = var.ag_capacities["max_size"]
   desired_capacity          = var.ag_capacities["desired_capacity"]
   wait_for_capacity_timeout = var.ag_capacities["wait_for_capacity_timeout"]
-  health_check_type         = "EC2"
+  health_check_type         = "ELB"
   health_check_grace_period = 360 # 6 mins until next healt check
+  load_balancers            = [var.lb_name]
   vpc_zone_identifier       = var.vpc_zone_identifier
   force_delete              = true
 
   #Provision
   user_data = templatefile(
-    "./templates/provision.sh.tpl",
+    "./modules/ec2-service/templates/provision.sh.tpl",
     {
-      "TARGET_APP" = var.target_app
-      "API_LB_IP"  = var.api_lb_ip
+      "TARGET_APP"      = var.target_app
+      "API_LB_IP"       = var.api_lb_ip
+      "API_ACCESS_PORT" = var.API_ACCESS_PORT
     }
   )
 

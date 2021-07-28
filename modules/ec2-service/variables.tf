@@ -3,6 +3,12 @@ variable "AMI_ID" {
   description = "AMI ID to use into the AG (Autoscaling group)"
 }
 
+variable "API_ACCESS_PORT" {
+  type        = string
+  description = "Port from where the api will be accessed"
+  default     = ""
+}
+
 variable "AWS_INSTANCE_TYPE" {
   type        = string
   description = "The Amazon AWS instance type to used into the AG"
@@ -30,8 +36,19 @@ variable "target_app" {
 
 variable "api_lb_ip" {
   type        = string
-  description = "IP of the api LB in case its the ui which will be launched"
+  description = "IP of the api LB only when the ui will be launched"
   default     = ""
+}
+
+variable "lb_name" {
+  type        = string
+  description = "Name of the Load balancer to attach the AG"
+}
+
+variable "name" {
+  type        = string
+  description = "Name to put on the created resources"
+  default     = "sgilz-asg"
 }
 
 variable "tags" {

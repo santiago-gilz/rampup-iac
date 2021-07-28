@@ -13,7 +13,7 @@ set_vars () {
             exit 1
         fi
     elif [ "$APP" = "api" ]; then
-        export PORT='3000' 
+        export PORT=${API_ACCESS_PORT} 
     else
         echo "Error: unkown argument. Allowed: 'api', 'ui'"
         exit 1

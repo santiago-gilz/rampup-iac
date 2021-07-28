@@ -34,12 +34,12 @@ resource "aws_security_group" "api_lb_sg" {
   vpc_id      = var.existing_resources["vpc_id"]
 
   ingress {
-      from_port        = 80
-      to_port          = 80
-      protocol         = "tcp"
-      cidr_blocks      = ["0.0.0.0/0"]
-      ipv6_cidr_blocks = ["::/0"]
-    }
+    from_port        = 80
+    to_port          = 80
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
   ingress {
     from_port        = 443
     to_port          = 443
@@ -93,10 +93,10 @@ resource "aws_security_group" "api_sg" {
 }
 
 resource "aws_security_group_rule" "api_access_port" {
-  from_port                = 3000
+  from_port                = var.access_ports["api"]
   protocol                 = "tcp"
   security_group_id        = aws_security_group.api_sg.id
   source_security_group_id = aws_security_group.api_lb_sg.id
-  to_port                  = 3000
+  to_port                  = var.access_ports["api"]
   type                     = "ingress"
 }

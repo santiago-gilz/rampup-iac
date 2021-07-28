@@ -22,6 +22,15 @@ variable "common_tags" {
   }
 }
 
+variable "access_ports" {
+  type        = map(string)
+  description = "Ports where the services will be running"
+  default = {
+    "api" = "3000"
+    "ui"  = "3030"
+  }
+}
+
 variable "existing_resources" {
   type        = map(string)
   description = "Existing resource IDs"
