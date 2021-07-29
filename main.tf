@@ -71,7 +71,7 @@ module "api_elb" {
     {
       instance_port     = var.access_ports["api"]
       instance_protocol = "HTTP"
-      lb_port           = 80
+      lb_port           = var.access_ports["api"]
       lb_protocol       = "HTTP"
     },
   ]

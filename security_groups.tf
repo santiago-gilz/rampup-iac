@@ -123,20 +123,11 @@ resource "aws_security_group" "api_lb_sg" {
 }
 
 resource "aws_security_group_rule" "http_api_lb" {
-  from_port                = 80
+  from_port                = var.access_ports["api"]
   protocol                 = "tcp"
   security_group_id        = aws_security_group.api_lb_sg.id
   source_security_group_id = aws_security_group.ui_sg.id
-  to_port                  = 80
-  type                     = "ingress"
-}
-
-resource "aws_security_group_rule" "https_api_lb" {
-  from_port                = 443
-  protocol                 = "tcp"
-  security_group_id        = aws_security_group.api_lb_sg.id
-  source_security_group_id = aws_security_group.ui_sg.id
-  to_port                  = 443
+  to_port                  = var.access_ports["api"]
   type                     = "ingress"
 }
 
