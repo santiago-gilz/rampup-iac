@@ -1,8 +1,3 @@
-locals {
-  api_elb_name = "api-elb"
-  ui_elb_name = "ui-elb"
-}
-
 resource "aws_instance" "bastion" {
   ami               = data.aws_ami.centos8.id
   availability_zone = "${var.AWS_REGION}a"
@@ -23,10 +18,10 @@ resource "aws_instance" "bastion" {
 
 module "ui_elb" {
   source  = "terraform-aws-modules/elb/aws"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   internal        = false
-  name            = local.ui_elb_name
+  name            = "sgilz-ui-elb"
   security_groups = [aws_security_group.ui_lb_sg.id]
   subnets         = [var.existing_resources["public_subnet_0_id"], var.existing_resources["public_subnet_1_id"]]
 
@@ -57,10 +52,10 @@ module "ui_elb" {
 
 module "api_elb" {
   source  = "terraform-aws-modules/elb/aws"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   internal        = true
-  name            = local.api_elb_name
+  name            = "sgilz-api-elb"
   security_groups = [aws_security_group.api_lb_sg.id]
   subnets         = [var.existing_resources["private_subnet_0_id"], var.existing_resources["private_subnet_1_id"]]
 
@@ -96,14 +91,14 @@ module "ui_asg" {
   AMI_ID            = data.aws_ami.centos8.id
   AWS_INSTANCE_TYPE = var.AWS_INSTANCE_TYPE
   AWS_KEY_PAIR_NAME = var.AWS_KEY_PAIR_NAME
-  api_lb_ip = module.api_elb.elb_dns_name
+  api_lb_ip         = module.api_elb.elb_dns_name
   ag_capacities = {
     "min_size"                  = 1
     "max_size"                  = 3
     "desired_capacity"          = 2
     "wait_for_capacity_timeout" = 0
   }
-  lb_name             = local.ui_elb_name
+  lb_name             = module.ui_elb.elb_name
   security_groups     = [aws_security_group.ui_sg.id]
   tags                = var.common_tags
   target_app          = "ui"
@@ -124,7 +119,7 @@ module "api_asg" {
     "desired_capacity"          = 2
     "wait_for_capacity_timeout" = 0
   }
-  lb_name             = local.api_elb_name
+  lb_name             = module.api_elb.elb_name
   security_groups     = [aws_security_group.api_sg.id]
   tags                = var.common_tags
   target_app          = "api"

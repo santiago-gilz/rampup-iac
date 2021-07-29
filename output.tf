@@ -10,6 +10,10 @@ output "bastion-dns" {
   value = aws_instance.bastion.public_dns
 }
 
+output "internal-api-dns-name" {
+  value = module.api_elb.elb_dns_name
+}
+
 output "ui-dns-name" {
   value = module.ui_elb.elb_dns_name
 }

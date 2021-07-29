@@ -105,7 +105,7 @@ resource "aws_security_group" "api_lb_sg" {
   name        = "api-lb-sec-group"
   description = "Allows HTTP,HTTPS access from internet respectively to the api LB"
   vpc_id      = var.existing_resources["vpc_id"]
-  
+
   egress {
     cidr_blocks      = ["0.0.0.0/0"]
     from_port        = 0
