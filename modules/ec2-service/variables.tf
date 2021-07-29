@@ -6,7 +6,7 @@ variable "AMI_ID" {
 variable "API_ACCESS_PORT" {
   type        = string
   description = "Port from where the api will be accessed"
-  default     = ""
+  default     = "3000"
 }
 
 variable "AWS_INSTANCE_TYPE" {
