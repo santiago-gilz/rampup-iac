@@ -24,15 +24,15 @@ module "asg" {
   vpc_zone_identifier       = var.vpc_zone_identifier
   force_delete              = true
 
-  #Provision
-  user_data = templatefile(
+  #Provision cancelled since it is done in the sys config management.
+  /* user_data = templatefile(
     "./modules/ec2-service/templates/provision.sh.tpl",
     {
       "TARGET_APP"      = var.target_app
       "API_LB_IP"       = var.api_lb_ip
       "API_ACCESS_PORT" = var.API_ACCESS_PORT
     }
-  )
+  ) */
 
   tags = [
     for tag_key, tag_value in var.tags :
