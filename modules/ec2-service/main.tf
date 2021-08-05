@@ -36,8 +36,8 @@ module "asg" {
   user_data = templatefile(
     "./modules/ec2-service/templates/run_ansible.sh.tpl",
     {
-      "TARGET_APP"      = var.target_app
-      "extra_vars"      = jsonencode(
+      "TARGET_APP" = var.target_app
+      "extra_vars" = jsonencode(
         {
           "api_lb_ip"       = var.api_lb_ip
           "api_access_port" = var.API_ACCESS_PORT
