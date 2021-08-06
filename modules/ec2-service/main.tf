@@ -43,7 +43,6 @@ module "asg" {
         }
       )
       "TARGET_APP"     = var.target_app
-      "include_extras" = "yes"
     }
   )
 
