@@ -13,6 +13,11 @@ variable "AWS_INSTANCE_TYPE" {
   default = "t2.micro"
 }
 
+variable "AWS_INTERNAL_LB" {
+  type = string
+  default = "api-lb.movie-analyst.internal"
+}
+
 variable "common_tags" {
   type        = map(string)
   description = "Common tags used for launching resources on the training AWS account"
