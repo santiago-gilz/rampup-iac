@@ -14,11 +14,11 @@ resource "aws_security_group" "jenkins_sg" {
 
   ingress {
     #get ssh access only for my IP
-    cidr_blocks = ["${data.external.my_ip.result.result}/32"]
+    cidr_blocks = ["0.0.0.0/0"]
     description = "HTTP access to the jenkins host"
-    from_port   = 8080
+    from_port   = 80
     protocol    = "tcp"
-    to_port     = 8080
+    to_port     = 80
   }
 
   egress {

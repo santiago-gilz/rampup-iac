@@ -91,7 +91,7 @@ module "ui_asg" {
   AMI_ID            = data.aws_ami.centos8.id
   AWS_INSTANCE_TYPE = var.AWS_INSTANCE_TYPE
   AWS_KEY_PAIR_NAME = var.AWS_KEY_PAIR_NAME
-  api_lb_ip         = var.AWS_INTERNAL_LB
+  api_lb_ip         = module.api_elb.elb_dns_name
   ag_capacities = {
     "min_size"                  = 1
     "max_size"                  = 3

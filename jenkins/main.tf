@@ -15,3 +15,8 @@ resource "aws_instance" "jenkins_instance" {
   user_data   = templatefile("./templates/install_jenkins.sh.tpl", {})
   volume_tags = var.common_tags
 }
+
+resource "aws_eip" "lb" {
+  instance = aws_instance.jenkins_instance.id
+  vpc      = true
+}

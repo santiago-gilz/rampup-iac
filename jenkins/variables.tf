@@ -10,7 +10,7 @@ variable "AWS_REGION" {
 
 variable "AWS_INSTANCE_TYPE" {
   type    = string
-  default = "t2.micro"
+  default = "t2.small"
 }
 
 variable "common_tags" {
