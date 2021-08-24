@@ -5,6 +5,7 @@
 sudo dnf install -y epel-release git
 sudo dnf install -y ansible
 ansible-galaxy collection install community.general
+sudo /usr/libexec/platform-python -m pip install docker
 
 # Clone ansible repo
 if [ ! -d rampup-sysconfig ]; then
@@ -12,4 +13,3 @@ if [ ! -d rampup-sysconfig ]; then
 fi
 cd rampup-sysconfig
 ansible-playbook playbooks/${TARGET_APP}.yml --extra-vars '${extra_vars}' -vv
-

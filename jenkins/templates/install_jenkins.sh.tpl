@@ -38,6 +38,11 @@ sudo dnf install -y python3
 sudo alternatives --set python /usr/bin/python3
 sudo dnf install -y python3-pip unzip
 
+#Install ansible
+sudo dnf install -y epel-release
+sudo dnf install -y ansible
+sudo dnf install -y python3-boto3
+
 # Firewalld options to access http through browser
 sudo dnf install -y firewalld
 sudo systemctl enable firewalld
