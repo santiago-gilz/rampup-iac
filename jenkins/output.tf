@@ -3,5 +3,5 @@ output "jenkins-ssh-access" {
 }
 
 output "jenkins-dns-name" {
-  value = "${aws_instance.jenkins_instance.public_dns}"
+  value = aws_instance.jenkins_instance.public_dns
 }

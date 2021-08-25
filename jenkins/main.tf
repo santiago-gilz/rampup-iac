@@ -3,6 +3,7 @@ resource "aws_instance" "jenkins_instance" {
   availability_zone = "${var.AWS_REGION}a"
   instance_type     = var.AWS_INSTANCE_TYPE
   key_name          = var.AWS_KEY_PAIR_NAME
+  private_ip        = "10.1.7.160"
   security_groups   = [aws_security_group.jenkins_sg.id]
   subnet_id         = var.existing_resources["public_subnet_0_id"]
 
