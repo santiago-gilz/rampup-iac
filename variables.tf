@@ -14,7 +14,7 @@ variable "AWS_INSTANCE_TYPE" {
 }
 
 variable "AWS_INTERNAL_LB" {
-  type = string
+  type    = string
   default = "api-lb.movie-analyst.internal"
 }
 
@@ -48,4 +48,10 @@ variable "existing_resources" {
     #vpc
     vpc_id = "vpc-0d2831659ef89870c"
   }
+}
+
+variable "jenkins_private_ip" {
+  type = string
+  description = "The private IP of the runnning Jenkins instance for direct SSH connections"
+  default = "10.1.7.160"
 }

@@ -76,6 +76,15 @@ resource "aws_security_group" "ui_sg" {
     to_port     = 22
   }
 
+  ingress {
+    #get ssh access from jenkins instance
+    cidr_blocks = ["${var.jenkins_private_ip}/32"]
+    description = "SSH access from the jenkins host"
+    from_port   = 22
+    protocol    = "tcp"
+    to_port     = 22
+  }
+
   egress {
     from_port        = 0
     to_port          = 0
@@ -135,9 +144,18 @@ resource "aws_security_group" "api_sg" {
   name   = "api_sec_group"
   vpc_id = var.existing_resources["vpc_id"]
   ingress {
-    #get ssh access only for my IP
+    #get ssh access from my IP
     cidr_blocks = ["${aws_instance.bastion.private_ip}/32"]
     description = "SSH access from the basion host"
+    from_port   = 22
+    protocol    = "tcp"
+    to_port     = 22
+  }
+
+  ingress {
+    #get ssh access from jenkins instance
+    cidr_blocks = ["${var.jenkins_private_ip}/32"]
+    description = "SSH access from the jenkins host"
     from_port   = 22
     protocol    = "tcp"
     to_port     = 22

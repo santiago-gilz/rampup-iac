@@ -13,7 +13,7 @@ resource "aws_security_group" "jenkins_sg" {
   }
 
   ingress {
-    #get ssh access only for my IP
+    #get HTTP access  from anywhere (needed for the UI interface and GitHub webhooks)
     cidr_blocks = ["0.0.0.0/0"]
     description = "HTTP access to the jenkins host"
     from_port   = 80
